@@ -1,0 +1,12 @@
+---
+- src: https://gitlab.soc.int.bell.ca/zebs/needfull-awx/awx-redhat-registration.git
+  scm: git
+  name: awx-redhat-registration
+
+- src: https://gitlab.soc.int.bell.ca/zebs/needfull-awx/awx-redhat-unregistration.git
+  scm: git
+  name: awx-redhat-unregistration
+
+- src: https://gitlab.soc.int.bell.ca/zebs/needfull-awx/awx-internal-certificates
+  scm: git
+  name: awx-internal-certificates

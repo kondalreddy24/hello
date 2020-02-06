@@ -1,0 +1,21 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: openstack
+lint:
+  name: yamllint
+platforms:
+- name: "${MOLECULE_HOSTNAME}.molecule.soc.int.bell.ca"
+  keypair_name: "${MOLECULE_HOSTNAME}"
+  image: soc-RHEL.7.6
+  flavor: m1.small
+  network: "SOCBackEndNetwork"
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

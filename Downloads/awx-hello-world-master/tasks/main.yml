@@ -1,0 +1,38 @@
+---
+- name: Check required variables
+  assert:
+    that:
+      - hello_world_network | length > 0
+      - hello_world_debug == 'true' or hello_world_debug == 'false'
+  tags:
+    - always
+
+- name: Install docker-ce
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - "docker-ce"
+
+- name: Create /etc/docker/ directory
+  file:
+    path: /etc/docker
+    state: directory
+
+- name: Configure daemon.json
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+  notify: reload docker
+
+- name: Ensure docker is started and enabled
+  systemd:
+    state: started
+    name: docker
+    enabled: yes
+
+- name: Create docker network
+  command: "{{ __hello_world_docker_path }} network create {{ hello_world_network }}"
+  register: __docker_network
+  failed_when: ("already exists" not in __docker_network.stderr) and (__docker_network.rc != 0)
+  changed_when: (__docker_network.rc == 0) and (__docker_network.stdout | length > 0)

@@ -1,0 +1,5 @@
+---
+- name: reload docker
+  systemd:
+    state: reloaded
+    name: docker

@@ -1,0 +1,7 @@
+---
+- name: Converge
+  become: yes
+  hosts: all
+
+  roles:
+    - role: awx-redhat-unregistration

@@ -1,0 +1,4 @@
+---
+# This file should contain values with defaults (or empty list / empty string)
+# that can be injected as parameter for this role in a playbook
+hello_world_network: ""
